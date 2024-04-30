@@ -4,7 +4,7 @@ name: blueish
 description: This is my personal OS image.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/silverblue-main
+base-image: ghcr.io/ublue-os/bluefin-dx
 image-version: 39 # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
@@ -36,6 +36,9 @@ modules:
       # repo-name: flathub
       # repo-title: "Flathub (system-wide)" # Optional; this sets the remote's user-facing name in graphical frontends like GNOME Software
       install:
+       - nextcloud-client
+       - nextcloud-client-nautilus
+       - flameshot
         # - org.mozilla.firefox
         # - org.gnome.Loupe
         # - one.ablaze.floorp//lightning # This is an example of flatpak which has multiple branches in selection (flatpak//branch).
@@ -44,6 +47,48 @@ modules:
       # Installing different branches of the same Flatpak is not supported.
       remove:
       # - org.gnome.eog
+      #
+      #
+  - type: default-flatpaks
+    notify: true # Send notification after install/uninstall is finished (true/false)
+    system:
+      # If no repo information is specified, Flathub will be used by default
+      # repo-url: https://dl.flathub.org/repo/flathub.flatpakrepo
+      # repo-name: flathub
+      # repo-title: "Flathub (system-wide)" # Optional; this sets the remote's user-facing name in graphical frontends like GNOME Software
+      install:
+        - com.microsoft.Edge
+        - net.mullvad.MullvadBrowser
+        - org.onlyoffice.desktopeditors
+        - one.ablaze.floorp
+        - com.github.zadam.trilium
+        - com.sindresorhus.Caprine
+        - org.signal.Signal
+        - io.github.shiftey.Desktop
+        - org.kde.okular
+        - org.gnome.DejaDup
+        - com.discordapp.Discord
+        - com.github.iwalton3.jellyfin-media-player
+        - org.localsend.localsend_app
+        - com.github.zocker_160.SyncThingy
+        - io.github.fabrialberio.pinapp
+        - com.bitwarden.desktop
+        - org.localsend.localsend_app
+        #- app.ytmdesktop.ytmdesktop
+          # - org.mozilla.firefox
+          # - org.gnome.Loupe
+          # - one.ablaze.floorp//lightning # This is an example of flatpak which has multiple branches in selection (flatpak//branch).
+          # Flatpak runtimes are not supported (like org.winehq.Wine//stable-23.08),
+
+        # only normal flatpak applications are (like Floorp Lightning web browser in this example).
+        # Installing diAdd deckstation fferent branches of the same Flatpak is not supported.
+      remove:
+       # - org.gnome.eog
+        - org.mozilla.Thunderbird
+        - org.mozilla.firefox.Locale
+        - org.mozilla.firefox
+        - org.mozilla.firefox.Locale
+
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
 
